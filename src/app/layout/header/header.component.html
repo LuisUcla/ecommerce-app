@@ -1,14 +1,33 @@
-<header class="bg-blue-500 text-gray-600 body-font">
-  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-    <a routerLink="/products" class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-yellow-500 rounded-full" viewBox="0 0 24 24">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-      </svg>
-      <span class="ml-3 text-xl font-bold">Productos</span>
-    </a>
-    
-    <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-      <a class="mr-5 hover:text-gray-900">Count</a>
-    </nav>
+<nav class="p-4 text-white bg-orange-500">
+  <div class="container flex items-center justify-between mx-auto">
+    <a routerLink="/" class="text-lg font-bold">E-commerce</a>
+    <div class="flex items-center">
+      <a routerLink="/products" class="mr-6">Products</a>
+      <div class="relative" (mouseenter)="showCart.set(true)" (mouseleave)="showCart.set(false)">
+        <a routerLink="/checkout">
+          <img src="../../../assets/icons/cart.svg" alt="">
+          <span class="absolute right-0 px-1 text-lg font-bold text-white -top-1">{{ cartStore.productsCount() }}</span>
+        </a>
+
+        @if(showCart() && cartStore.productsCount()) {
+          <div [ngClass]="{ 'show-cart-animation': showCart() }"
+            class="absolute right-0 z-30 w-48 p-2 mt-2 text-white rounded-sm bg-slate-400">
+          
+            @for(product of cartStore.products(); track $index) {
+              <div class="flex items-center justify-between">
+                <span>{{ product.qty }} - {{ product.title | slice:0:10 }} {{ product.subTotal || product.price | currency }}</span>
+              </div>
+            }
+            
+            <hr class="my-4 border-gray-500 border-t-1" />
+            <div class="flex justify-between py-3 font-light">
+              Total:
+              <span class="not-italic font-bold">{{ cartStore.totalAmount() | currency }}</span>
+            </div>
+          </div>
+        }
+  
+      </div>
+    </div>
   </div>
-</header>
+</nav>

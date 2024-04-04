@@ -4,13 +4,13 @@ interface Rating {
 }
 
 export interface Product {
-    id: string;
+    id: number;
     title: string;
-    price: string;
+    price: number;
     category: string;
     description: string;
     image: string;
     rating: Rating;
-    qty: number;
-    subtotal: number;
+    qty: number; // para la cantidad de productos en el cart
+    subTotal: number;
 }
