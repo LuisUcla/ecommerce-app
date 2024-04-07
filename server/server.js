@@ -1,5 +1,5 @@
 // This is your test secret API key.
-const stripe = require('stripe')('sk_test_51P2fTwCJuML7KJIvlfqvss5UYndjdJgCGDwvw5pBzdRpToXBGG761ypnFmMDYQGRc81QrliD2ofD6AseRO7lF5ca00St2kejNY'); // se puede dejar este key, sino colocar el tuyo personalizado
+const stripe = require('stripe')(''); // se puede dejar este key, sino colocar el tuyo personalizado
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
