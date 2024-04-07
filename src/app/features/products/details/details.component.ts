@@ -13,15 +13,16 @@ import { CartStore } from '@shared/store/shopping-cart.store';
   styleUrl: './details.component.scss'
 })
 export default class DetailsComponent implements OnInit {
-  productId = input<number>(0, { alias: 'id' }) // viene de la url
-  product!: Signal<Product | undefined>;
+  productId = input<number>(0, { alias: 'id' })
+  product!: Signal<Product | undefined>
   starsArray: number[] = new Array(5).fill(0);
   private readonly productService = inject(ProductsService);
-  private readonly sanitizer = inject(DomSanitizer); // para insertar html (estrellas de rating)
+  private readonly sanitizer = inject(DomSanitizer)
   cartStore = inject(CartStore);
 
-  ngOnInit(): void {
+   ngOnInit(): void {
     this.product = this.productService.getProductById(this.productId())
+    
   }
   onAddToCart() {
     this.cartStore.addToCart(this.product() as Product)
